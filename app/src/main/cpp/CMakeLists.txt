@@ -36,13 +36,25 @@ find_library( # Sets the name of the path variable.
         # you want CMake to locate.
         log)
 
+
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
 target_link_libraries( # Specifies the target library.
-        like_to_hear
+        like_to_hear log oboe
 
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib})
+# Set the path to the Oboe directory.
+# TODO change this to where you downloaded oboe library
+set (OBOE_DIR /Users/Public/oboe)
+# Add the Oboe library as a subdirectory in your project.
+# add_subdirectory tells CMake to look in this directory to
+# compile oboe source files using oboe's CMake file.
+# ./oboe specifies where the compiled binaries will be stored
+add_subdirectory (${OBOE_DIR} ./oboe-bin)
+
+#Specify the include directory path
+include_directories(${OBOE_DIR}/include)
